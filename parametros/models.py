@@ -11,7 +11,7 @@ class Adjunto(models.Model):
 
     class Meta:
         db_table = 'adjunto'
-        managed = False
+        # managed = False
 
 
 class AuditLog(models.Model):
@@ -25,7 +25,7 @@ class AuditLog(models.Model):
 
     class Meta:
         db_table = 'audit_log'
-        managed = False
+        # managed = False
 
 
 class CanalNotificacion(models.Model):
@@ -37,7 +37,7 @@ class CanalNotificacion(models.Model):
 
     class Meta:
         db_table = 'canal_notificacion'
-        managed = False
+        # managed = False
 
 
 class Cargo(models.Model):
@@ -50,7 +50,7 @@ class Cargo(models.Model):
 
     class Meta:
         db_table = 'cargo'
-        managed = False
+        # managed = False
 
 
 class Clasificacion(models.Model):
@@ -63,7 +63,7 @@ class Clasificacion(models.Model):
 
     class Meta:
         db_table = 'clasificacion'
-        managed = False
+        # managed = False
 
 
 class EstadoAlerta(models.Model):
@@ -76,7 +76,7 @@ class EstadoAlerta(models.Model):
 
     class Meta:
         db_table = 'estado_alerta'
-        managed = False
+        # managed = False
 
 
 class EstadoResolucion(models.Model):
@@ -86,7 +86,7 @@ class EstadoResolucion(models.Model):
 
     class Meta:
         db_table = 'estado_resolucion'
-        managed = False
+        # managed = False
 
 
 class Urgencia(models.Model):
@@ -100,7 +100,7 @@ class Urgencia(models.Model):
 
     class Meta:
         db_table = 'urgencia'
-        managed = False
+        # managed = False
 
 
 class Jerarquia(models.Model):
@@ -113,7 +113,7 @@ class Jerarquia(models.Model):
     class Meta:
         db_table = 'jerarquia'
         unique_together = (('colaborador', 'nivel'),)
-        managed = False
+        # managed = False
 
 
 class Notificacion(models.Model):
@@ -129,7 +129,7 @@ class Notificacion(models.Model):
 
     class Meta:
         db_table = 'notificacion'
-        managed = False
+        # managed = False
 
 
 class Aprobacion(models.Model):
@@ -143,4 +143,4 @@ class Aprobacion(models.Model):
 
     class Meta:
         db_table = 'aprobacion'
-        managed = False
+        # managed = False
