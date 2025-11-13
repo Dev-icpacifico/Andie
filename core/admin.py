@@ -33,7 +33,7 @@ class AlertaAdmin(admin.ModelAdmin):
         ("Datos de la alerta", {
             "fields": (
                 ("proyecto", "edificio"), ("piso", "departamento"),
-                ("recinto",),
+                ("recinto","zona_exterior"),
                 ("mensaje_alerta",),
                 ("fecha_apertura",),  # puedes agrupar en tuplas para líneas en horizontal
 
