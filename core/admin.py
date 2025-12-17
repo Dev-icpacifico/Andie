@@ -8,8 +8,7 @@ from .models import (
 
 @admin.register(Alerta)
 class AlertaAdmin(admin.ModelAdmin):
-    # Pequeños trucos para acortar el form
-    # form = AlertaForm  # <<--- usa el form personalizado
+
     class Media:
         css = {
             'all': ('css/custom_admin.css',)  # Ruta dentro de static/
@@ -22,8 +21,7 @@ class AlertaAdmin(admin.ModelAdmin):
     autocomplete_fields = ("proyecto", "edificio", "departamento", "colaborador_reporta", "piso",
                            "clasificacion_ia", "urgencia_ia", "clasificacion_val", "urgencia_val")
     search_fields = ("mensaje_alerta", "departamento__nombre", "edificio__nombre")
-    list_display = (
-    "numero_caso", "asignada_a", "colaborador_reporta", "unidad_operativa", "proyecto", "zona_exterior", "edificio",
+    list_display = ("numero_caso", "asignada_a", "colaborador_reporta", "unidad_operativa", "proyecto", "zona_exterior", "edificio",
     "piso", "estado_alerta", "fecha_apertura")
     list_filter = ("asignada_a","estado_alerta", "unidad_operativa", "fecha_apertura")
     ordering = ("-numero_caso",)
@@ -67,7 +65,7 @@ class EdificioAdmin(admin.ModelAdmin):
 
 @admin.register(Persona)
 class PersonaAdmin(admin.ModelAdmin):
-    list_display = ('persona_id', 'nombres', 'apellidos', 'email', 'cargo', 'activo')
+    list_display = ('rut', 'nombres', 'apellidos', 'email', 'cargo', 'activo')
     search_fields = ('nombres', 'apellidos', 'email')
     list_filter = ('activo',)
 

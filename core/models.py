@@ -8,32 +8,32 @@ from parametros.models import EstadoResolucion, Cargo
 class Alerta(models.Model):
     alerta_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     fecha_apertura = models.DateTimeField()
-    proyecto = models.ForeignKey('Proyecto', models.DO_NOTHING, blank=True)
-    edificio = models.ForeignKey('Edificio', models.DO_NOTHING, blank=True)
-    piso = models.ForeignKey('Piso', models.DO_NOTHING, blank=True)
-    departamento = models.ForeignKey('Departamento', models.DO_NOTHING, blank=True)
-    recinto = models.CharField(max_length=50,blank=True)
+    proyecto = models.ForeignKey('Proyecto', models.DO_NOTHING, blank=True, null=True)
+    edificio = models.ForeignKey('Edificio', models.DO_NOTHING, blank=True, null=True)
+    piso = models.ForeignKey('Piso', models.DO_NOTHING, blank=True, null=True)
+    departamento = models.ForeignKey('Departamento', models.DO_NOTHING, blank=True, null=True)
+    recinto = models.CharField(max_length=50,blank=True, null=True)
     mensaje_alerta = models.TextField()
-    clasificacion_ia = models.ForeignKey('parametros.Clasificacion', models.DO_NOTHING, blank=True)
-    urgencia_ia = models.ForeignKey('parametros.Urgencia', models.DO_NOTHING, blank=True)
-    clasificacion_val = models.ForeignKey('parametros.Clasificacion', models.DO_NOTHING, related_name='alerta_clasificacion_val_set', blank=True)
-    urgencia_val = models.ForeignKey('parametros.Urgencia', models.DO_NOTHING, related_name='alerta_urgencia_val_set', blank=True)
+    clasificacion_ia = models.ForeignKey('parametros.Clasificacion', models.DO_NOTHING, blank=True, null=True)
+    urgencia_ia = models.ForeignKey('parametros.Urgencia', models.DO_NOTHING, blank=True, null=True)
+    clasificacion_val = models.ForeignKey('parametros.Clasificacion', models.DO_NOTHING, related_name='alerta_clasificacion_val_set', blank=True, null=True)
+    urgencia_val = models.ForeignKey('parametros.Urgencia', models.DO_NOTHING, related_name='alerta_urgencia_val_set', blank=True, null=True)
     partida_faena = models.CharField(max_length=80,blank=True)
     partida_correcta = models.BooleanField(blank=True, default=False)
     ubicacion_asignada = models.BooleanField(blank=True, default=False)
     observaciones_revision = models.TextField(blank=True)
     estado_alerta = models.ForeignKey('parametros.EstadoAlerta', models.DO_NOTHING)
-    unidad_operativa = models.ForeignKey('UnidadOperativa', models.DO_NOTHING, blank=True)
+    unidad_operativa = models.ForeignKey('UnidadOperativa', models.DO_NOTHING, blank=True, null=True)
     colaborador_reporta = models.ForeignKey('Persona', models.DO_NOTHING)
-    fecha_asignacion = models.DateTimeField(blank=True)
-    fecha_resolucion = models.DateTimeField(blank=True)
-    fecha_aprobacion = models.DateTimeField(blank=True)
-    fecha_cierre = models.DateTimeField(blank=True)
+    fecha_asignacion = models.DateTimeField(blank=True, null=True)
+    fecha_resolucion = models.DateTimeField(blank=True, null=True)
+    fecha_aprobacion = models.DateTimeField(blank=True, null=True)
+    fecha_cierre = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField()
-    updated_at = models.DateTimeField(blank=True)
-    zona_exterior = models.ForeignKey('ZonaExterior', models.DO_NOTHING, blank=True)
+    updated_at = models.DateTimeField(blank=True, null=True)
+    zona_exterior = models.ForeignKey('ZonaExterior', models.DO_NOTHING, blank=True, null=True)
     numero_caso = models.IntegerField(unique=True)
-    asignada_a = models.ForeignKey('Persona', models.DO_NOTHING, related_name='alerta_asignada_a_set', blank=True)
+    asignada_a = models.ForeignKey('Persona', models.DO_NOTHING, related_name='alerta_asignada_a_set', blank=True, null=True)
 
     def __str__(self):
         return str(self.numero_caso)
@@ -56,10 +56,10 @@ class Persona(models.Model):
     activo = models.BooleanField(default=True)
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField(blank=True)
-    supervisor = models.ForeignKey('self', models.DO_NOTHING, blank=True)
+    supervisor = models.ForeignKey('Persona', models.DO_NOTHING, blank=True, null=True)
 
     def __str__(self):
-        return self.nombres +" "+ self.apellidos
+        return str(self.nombres) +" "+ str(self.apellidos)
 
     class Meta:
         db_table = 'persona'
@@ -73,7 +73,7 @@ class UnidadOperativa(models.Model):
     created_at = models.DateTimeField()
 
     def __str__(self):
-        return self.nombre
+        return str(self.nombre)
 
     class Meta:
         db_table = 'unidad_operativa'
